@@ -1,3 +1,2 @@
-1.如果一个页面占据了整个界面包括状态栏，当从其他的View回到刚加载的该界面的时候
-应该把当前的ViewController的AutomaticallyAdjustsScrollViewInsets为NO。不然可能
-改变为从状态栏下显示ScrollView。
+1.如果一个页面占据了整个界面包括状态栏，当从其他的View回到刚加载的该界面的时候应该把当前的ViewController的AutomaticallyAdjustsScrollViewInsets为NO。不然可能改变为从状态栏下显示ScrollView。
+
