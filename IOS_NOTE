@@ -1,2 +1,4 @@
 1.如果一个页面占据了整个界面包括状态栏，当从其他的View回到刚加载的该界面的时候应该把当前的ViewController的AutomaticallyAdjustsScrollViewInsets为NO。不然可能改变为从状态栏下显示ScrollView。
-
+2.提交代码流程：git commit -am “comment” -> arc diff --create 如果之前提交被打回应该使用arc diff -> 代码审核通过之后arc land。代码提交流程完成；
+3.判定一个数组不为空，集合类为空不能用==nil判断，而应改使用[array isKindof:[NSArray class]]&&array.count>0判断；
+4.使用delegate的时候，要确定调用的方法实现，因为OC不能编译不能类型检查，要等到运行的时候才能确定真正的类型，所以很容易因为类型不同而崩溃。
