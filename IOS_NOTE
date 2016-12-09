@@ -2,3 +2,7 @@
 2.提交代码流程：git commit -am “comment” -> arc diff --create 如果之前提交被打回应该使用arc diff -> 代码审核通过之后arc land。代码提交流程完成；
 3.判定一个数组不为空，集合类为空不能用==nil判断，而应改使用[array isKindof:[NSArray class]]&&array.count>0判断；
 4.使用delegate的时候，要确定调用的方法实现，因为OC不能编译不能类型检查，要等到运行的时候才能确定真正的类型，所以很容易因为类型不同而崩溃。
+5.linux命令 alias设置指令的别名，命令格式为：alias [别名]='命令'; 例如我们可以为ls -a设置别名为ll，只需命令行输入alias ll='ls -a'
+6.Vi命令：在命令模式输入大写的A：从当前行的行尾插入文字。
+7.arc diff HEAD^ arc land --reversion [ID] --onto [branch]
+8.arc which命令显示当前的提交；
