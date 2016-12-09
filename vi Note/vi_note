@@ -1,0 +1,5 @@
+this is a test vi command script.
+command i switch to insert mode from command mode
+command ZZ is equal with "wq!" of last line mode
+command A move the cursor to the tail of line and change to the insert mode
+
