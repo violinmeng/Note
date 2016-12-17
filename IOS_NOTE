@@ -4,5 +4,59 @@
 4.使用delegate的时候，要确定调用的方法实现，因为OC不能编译不能类型检查，要等到运行的时候才能确定真正的类型，所以很容易因为类型不同而崩溃。
 5.linux命令 alias设置指令的别名，命令格式为：alias [别名]='命令'; 例如我们可以为ls -a设置别名为ll，只需命令行输入alias ll='ls -a'
 6.Vi命令：在命令模式输入大写的A：从当前行的行尾插入文字。
-7.arc diff HEAD^ arc land --reversion [ID] --onto [branch]
+7.arc diff HEAD^可以指定特定的git HEAD
+	 arc land --reversion [ID] --onto [branch]指明本地仓库和远程仓库；
 8.arc which命令显示当前的提交；
+9.iOS中的动态库和静态库：
+	静态库：模块化，避免少量改动导致大量的重复编译连接，可以重用。
+	动态库：缩小最终可执行文件的体积，多个应用程序共享内存中得到同一份文件，节省资源，可以不重新编译连接可执行程序的前提下，更新动态库文件达到更新应用程序的目的。
+10.Realm数据库：【Objective-C】
+	1）主要限制：某个对象只能在其被创建的那个线程中使用，并且您无法访问任何存储属性的实例变量。
+	2）支持类型：BOOL、bool、int、NSInteger、long、long long、float、double、NSString、NSDate、NSData、NSNumber。
+	3）RLMArray<Object *><Object>
+	RLMArray: 属性类型。
+	<Object *>: 属性的特别化(generic specialization)，这可以阻止在编译时使用错误对象类型的数组。
+	<Object>: 此RLMArray遵守的协议，可以让 Realm 知晓如何在运行时确定数据模型的架构。
+	4）TO-ONE:use @property to implement;
+	当使用 RLMObject 属性的时候，您可以通过正常的属性访问语法来访问嵌套属性。比如说，rex.owner?.address.country会依次读取对象的属性，然后自动从 Relam 中匹配所需的每一个对象。
+	5）TO-MANY:use RLMArray, the interface alike NSMutableArray
+	RLM_ARRAY_TYPE 宏创建了一个协议，从而允许 RLMArray<Dog> 语法的使用。如果该宏没有放置在模型接口的底部的话，您或许需要提前声明该模型类。
+	6）Inverse Relationship:
+	RLMLinkingObjects:链接对象
+	7）Optional Properties：
+	通常情况下，NSString *、NSData * 以及 NSDate * 属性可以设置为 nil，
+	可以重写您的 RLMObject 子类的 +requiredProperties 方法。防止属性为nil；
+	@property NSNumber<RLMInr> *age;这样就可以把age置为nil；
+	RLMProperty 的子类属性始终都可以为 nil，因此这些类型不能够放在 requiredProperties中，并且 RLMArray 不支持存储 nil 值。
+	Object必须是Optional Properties；
+	RLMArray必须是Unoptional Properties；
+	RLMLinkObjects必须是Unoptional Properties；
+	8）Attributes；
+	由于 Realm 在自己的引擎内部有很好的语义解释系统，所以 Objective‑C 的许多属性特性将被忽略，如nonatomic, atomic, strong, copy 和 weak 等。 
+	如果您在 Swift 中使用 Objective-C 版本的 Realm 的话，模型的属性前面需要加上 dynamic var，这是为了让这些属性能够被底层数据库数据所访问。
+	9）Indexed Properties
+	重写+indexedProperties方法可以为数据模型中需要添加索引的属性建立索引；
+	Realm支持字符串、整数、BOOL以及NSDate属性作为索引；
+	10）属性默认值
+	重写+defaultPropertyValues
+	11）对象的自动更新特性
+	RLMObject 实例是底层数据的动态表现，其会进行自动更新，这意味着对象不需要进行刷新。
+	12）Primary Keys
+	重写 +ignoredProperties 可以防止 Realm 存储数据模型的某个属性。Realm 将不会干涉这些属性的常规操作，它们将由成员变量(ivar)提供支持，并且您能够轻易重写它们的 setter 和 getter。
+	13）模型继承：
+	以下是可以完成的操作：
+	父类中的类方法，实例方法和属性可以被它的子类所继承
+	子类中可以在方法以及函数中使用父类作为参数
+	以下是不能完成的：
+	多态类之间的转换（例如子类转换成子类，子类转换成父类，父类转换成子类等）
+	同时对多个类进行检索
+	多类容器 (RLMArray 以及 RLMResults)。
+	建议使用以下模式，也就是使用类组合模式来构建子类，以便能够包含其他类中的相关逻辑。
+	14）创建对象：可以通过创建一个对象然后设置其属性，通过字典或数组创建新的对象。
+	15）嵌套属性：（Nested Object）
+	即使是数组以及字典的多重嵌套，Realm 也能够轻松完成对象的创建。注意 RLMArray 只能够包含 RLMObject 类型，不能包含诸如NSString之类的基础类型。
+	16）添加数据：我们建议您使用该方案常规的最佳做法：将写入操作转移到一个独立的线程中执行。
+	由于 Realm 采用了 MVCC 设计架构，读取操作 并不会 因为写入事务正在进行而受到影响。除非您需要立即使用多个线程来同时执行写入操作，不然您应当采用批量化的写入事务，而不是采用多次少量的写入事务。
+	17）更新数据：分为内容直接更新、通过主键更新、键值编码更新；更新的时候都要在事务中进行；
+	18）删除数据：也需要在事务中操作；
+	19）查询：
