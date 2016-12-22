@@ -1,0 +1,17 @@
+1.python是一个高层次的结合了解释性、变异性、互动性和面向对象的脚本语言；
+	python是一种解释型语言；
+	python是交互式语言；像命令行
+	python是面对对象语言；
+2.python的特点：易于学习、易于阅读、易于维护、广泛的标准库、互动模式、可移植、可扩展、数据库、GUI编程、可嵌入到C／C++程序；
+3.python分为交互式变成，像命令行一样，交互式编程；和脚本式编程，就像shell脚本一样。
+4.python的标识符：标识符又字母、数字、下划线组成，但不能以数字开头；
+	区分大小写；
+	以_开头的如_foo代表不能直接访问的类属性，需要通过类提供的接口进行访问；
+	以双下划线开头的如__foo代表类的私有成员；
+	__foo__代表python里的特殊方法专用的标识；__init__()代表类的构造函数；
+5.python的保留字符.and exec not assert finally or break for pass class from print continu global raise def if return del import try elif in while else is with except lamba yield;
+6.行和缩进：python代码块不适用大括号{}来控制类、函数以及其他逻辑判断，而是使用缩进来写模块；python对格式要求很严格。
+7.多行语句：一般以新行作为语句的结束；可以使用\将一行的 语句分为多行显示；
+	语句中包含[],{}或()就不需要使用多行连接符；
+8.引号：python接收单引号('),双引号 (")三引号 (''' """)
+	
