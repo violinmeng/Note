@@ -60,3 +60,17 @@
 	17）更新数据：分为内容直接更新、通过主键更新、键值编码更新；更新的时候都要在事务中进行；
 	18）删除数据：也需要在事务中操作；
 	19）查询：
+
+
+
+11.IOS的事件传递和响应者链：
+	- (nullable UIView *)hitTest:(CGPoint)point withEvent:(nullable UIEvent *)event;   // recursively calls -pointInside:withEvent:. point is in the receiver's coordinate system
+	- (BOOL)pointInside:(CGPoint)point withEvent:(nullable UIEvent *)event;
+通过重写这两个函数可以自定义响应者链，例如可以通过这种方式来增大UIbutton的响应范围；
+在判断point是不是在view中的时候要利用：
+- (CGPoint)convertPoint:(CGPoint)point toView:(nullable UIView *)view;
+- (CGPoint)convertPoint:(CGPoint)point fromView:(nullable UIView *)view;
+- (CGRect)convertRect:(CGRect)rect toView:(nullable UIView *)view;
+- (CGRect)convertRect:(CGRect)rect fromView:(nullable UIView *)view;
+来转换point。
+12:
