@@ -73,4 +73,8 @@
 - (CGRect)convertRect:(CGRect)rect toView:(nullable UIView *)view;
 - (CGRect)convertRect:(CGRect)rect fromView:(nullable UIView *)view;
 来转换point。
-12:
+12:pod删除之前的包，重新install的命令：
+	rm -rf ~/Library/Caches/CocoaPods
+	rm -rf Pods/
+	pod install
+13.
