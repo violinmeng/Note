@@ -77,4 +77,4 @@
 	rm -rf ~/Library/Caches/CocoaPods
 	rm -rf Pods/
 	pod install
-13.
+13.如何打包静态库;
