@@ -1,0 +1,65 @@
+(change line whole line)
+(dhfja)
+blue is blue  the color is beautiful haha .
+(sjikdsidhash hsjs)
+()
+
+gadflySDJikdsidhash hsj*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-s)
+gadflyshd***************************************************4)
+(if(x==0){)
+(	y = 0;)
+(}else{)
+(	z = 0;)
+}
+
+#indent
+if(x){
+:}
+{
+set }
+#if x ==0
+	y=0;
+#elseif x==1
+	x=0;
+SDJsldks;s sdjsldks;s this sgs jd skdksjdksa this S[ei]DSHDSjsdhsdhsdsdHDHJDKsa
+dhahd dshDGH
+SDJsldks;s
+SDJsldks;s
+djsldks;s
+dlfak
+;s
+vi has three types of mode
+Edit\Insert\EndLine
+Edit Mode
+x :删除当前光标下的字符；
+diw:删除光标所在的单词，不包括空白字符；
+daw:删除光标所在的单词，包括空白字符；
+dw:从当前位置删除到下一个单词词首；
+D：删除到行尾；
+C:modify the contents from previous to the end of line; C==c$;
+S:modify the whole line;
+dd:delete the whole line;
+yy:copy the whole line;
+o: insert one space line below current line;
+O: insert one space line above current line;
+A: insert before the head of current line;
+I: insert after the tail of current line;
+.: repeat the previous command;
+u: revoke changes;
+Ctrl +r : reDo
+p: duplicate to the front of cursor;
+P: duplicate to the rear of cursor;
+d: cut
+Ctrl + g: get the information of current line;
+g Ctrl + g: get the statistic number of char, word etc.
+dw de dE db d$ s0
+Grep
+. eg: p.p ===>pip pop pep
+* eg: bugs* ====> bug bugs bugssss 匹配其前面的单个字符的0个或多个实例；
+^ 要求后面的正则表达式要出现在一行的开始，当^不在正则表达式的开始时，^只代表本身；
+$ 当用于正则表达式结尾的时候，它要求前面的正则表达式要出现在一行的结尾，当$不再结尾时，$只代表本身；
+\ 转义字符
+[] 匹配方括号所包括的字符中的任何一个，[A-Z],[0-9];在方括号里仍需要转义的三个字符是\ ] - 其中-放在方括号的第一个字符位，不需要转义；
+^只有在方括号内第一个字符才有特殊意义，表示方括号将匹配不在列表内的任何一个字符；
+\( \)把\(和\)之间的模式保存到专门的存储空间或“存储缓冲区”，最多可以吧9个模式保存到单一行中。eg：用this or that修改That or this，则可以输入：%s／\(That\) or \(this\)/\2 or \1/
+\< \> 在单词的开始（\<）或结尾（\>）匹配字符；不必成对出现；匹配上次搜索中使用的任何正则表达式；只能在普通的搜索中（使用／）使用这种模式，在替换命令中它将不起到模式的作用，但是在替换命令的替换部分则具有相同的含义。

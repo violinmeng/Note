@@ -78,3 +78,31 @@
 	rm -rf Pods/
 	pod install
 13.如何打包静态库;
+14.iOS7 and iOS8 differ in NSURLSessionTask implementation, which makes the next bit code a bit tricky. 
+Many Unit Tests have been built to validate as much of this behavior has possible.
+Here is what we know:
+	- NSURLSessionTasks are implemented with class clusters, meaning the class you request from the API isn't actually the type of class you will get back.
+	-Simply referencing '[NSURLSessionTask class]' will not work. You need to ask an 'NSURLSession' to actually creat an object, and grab the class from there.
+	-On iOS 7, 'localDataTask' is a '__NSCFLocalDataTask', which inherites from '__NSCFLocalSessionTask', which inherites from '__NSCFURLSessionTask'.
+	-On iOS 8, 'localDataTask' is a '__NSCFLocalDataTask', which inherites from '__NSCFLocalSessionTask', which inherites from 'NSURLSessionTask'.
+	-On iOS 7, '__NSCFLocalSessionTask' and '__NSCFURLSessionTask' are the only two classes that have their own implementations of 'resume' and 'suspend', and '__NSCFLocalSessionTask' DOES NOT CALL SUPER. this means both classes need to be swizzled.
+	-On iOS8, 'NSURLSessionTask' is the only class that implements 'resume' and 'suspend'. This means this is only class needs to be swizzled.
+	-Because 'NSURLSessionTask' is not involved in the class hierarchy for every version of iOS, its easier to add the swizzled methods to a dummy class and manage them there.
+Some Assumptions:
+	-No implementations of 'resume' or 'suspend' call super. If this were to change in a future version of iOS, we'd need to handle it.
+	-No background task classed override 'resume' or 'suspend'
+The current solutions:
+	1) Grab an instance of '__NSCFLocalDataTask' by asking an instance of 'NSURLSession' for a data task.
+	2) Grab an pointer to the original implementation of 'af_resume'
+	3) Check to see if the current class has an  implementation of resume. If so, continue to step 4.
+	4) Grab the super class of the current class.
+	5) Grab a pointer for the current class to the current implementation of 'resume'.
+	6) Grab a pointer for the super class to the current implementation of 'resume'.
+	7) If the current class implementation of 'resume' is not equal to the super class implementation of 'resume' AND the current implementation of 'resume' is not equal to the original implementation of 'af_resume', THEN swizzle the methods
+	8)Set the current class to the super class ,and repeat steps 3-8.
+15. Error ld: 3 duplicate symbols for architecture armv7
+	  clang: error: linker command failed with exit code 1 (use -v to see invocation)
+	This error occurs when the repeated files in the project. Search on the file name in the xcode file navigator and solve the problem.
+16.Masonry添加约束的时候要注意，需要把视图添加到subview之后才能添加，不然会约束不会有作用。
+17.在用dispatch_once的时候，dispatch_once_t的Token，设置的时候，如果添加static关键字，表示在整个运行周期内，只运行一次。而不加static，只是在变量存在周期内，只运行一次。
+18.

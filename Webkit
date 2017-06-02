@@ -1,0 +1,55 @@
+Webkit
+  Display web content in windows. Implement browser features such as following user-activated links, manageing a back-forward list, and managing a history of recently visited pages.
+Overview
+  Webkit provides a set of classes to diaplay web content in windows, and implements browser features such as following links when clicked by the user, manageing a back-forward list, and managing a history of pages recently visited. Webkit greatly simplifies the complicated process of loading webpages--that is, asynchronously requesting web content from an HTTP server where the response may arrive incrementally, in random order, or partially due to network errors. Webkit also simplifies the process of diaplaying that content which can contain various MIME types, and compound frame elements each with their own set of scroll bars.
+Concurrency Note
+  the Webkit framework is not thread-safe. If you call functions or methods in this framework, you must do so exclusively on the main program thread.
+WKNavigationDelegate
+  the methods of the WKNavigationDelegate protocol help you implement custom behaviors that are triggerd during a web view's process of accepting, loading, and completing a navigation request.
+WKProcessPool
+  A WKProcessPool object represents a pool of Web content processes.
+  The process pool addociated with a web view is specified by its web view configuration. Each web view is given its own Web Content process until an implementation-defined process limit is reached; after that, web views with the same process pool end up sharing Web Content processes.
+WKWindowFeatures
+  A WKWindowFeatures object specifies optional attributes for the containingwindows when a new web view is request.
+WKWebView
+  A WKWebView object displays interactive web content, such as for an in-app browser. You can use the WKWebView class to embed web content in your app. To do so, create a WKWebView object, set it as the view, and send it a request to load web content.
+WKWebViewConfiguration
+  A collection of properties used to initialize a web view.
+WKPreferences
+  A WKPreferences object encapsulates the preference settings for a web view.
+WKUIDelegate
+  the WKUIDelegate class provides methods for presenting native user interface elements on behalf of webpage.
+  web view user interface delegates implements this protocol to control the opening of new windows, augment the behavior of default menu items displayed when the user click elements, and perform other user interface-related tasks. These methods can be invoked as a result of handing JavaScript or other plug-in content. The default web view implementation assumes one window per web view, so non-conventional user interfaces might implement a user interface delegate.
+WKNavigation
+  A WKNavigation object contains information for tracking the loading processs of webpage.
+  A navigation object is returned from the web view load methods and is also passed to the navigation delegate methods to uniquely identify a webpage load from start to finish. It has no method or propeties of its own.
+WKNavigationAction
+  A WKNavigationAction object contains information about an action that may cause a navigation, used for making policy desisions.
+WKNavigationResponse
+  A WKNavigationResponse object contains information about a navigation response, used for making policy decisions.
+WKBackForwardList
+  A WKBackForwardList object contains a list of visited pages used to go back and forward to the most recent page.
+WKBackForwardListItem
+  A WKBackForWardListItem object represents a webpage in the back-forward list of a web view.
+WKFrameInfo
+  A WKFrameInfo object contains information about a frame on a webpage.
+  An instance of this class is a transient, data-only object; it does not uniquely identify a frame across multiple delegate method calls.
+WKWebsiteDataRecord
+  A WKWebsiteDataRecord object represents website data grouped by the originating URL's domain name and suffix.
+WKWebsiteDataStore
+  A WKWebsiteDataStore object represents various types of data used by a chosen website. Data types include cookies, disk and memory caches, and persistent data such as WebSQL, IndexedDB databases, and local storages.
+WKOpenPanelParameters
+  A WKOpenPanelParameters object contains the parameters that a file upload control has specified.
+WKUserContentController
+  A WKUserContentController object provides a way for JavaScript to post messages an inject user scripts to a webview.
+WKScriptMessage
+  A WKScriptMessage object contains information about a message sent from a webpage.
+WKUserScript
+  A WKUserScript object represents a script that can be injected into a webpage.
+WKScriptMessageHandler
+  A class conforming to the WKScriptMessageHandler protocal provides a method for receiving message form JavaScript running in a webpage.
+WKSecurityOrigin
+  A WKSecurityOrigin object consists of a host name, a protocal, and a port number. A first-party load is any load URL has the same security origin ad the requseting web site. First-party webpages can access each other's resources such ad scripts and database.WKSecurityOrigin
+  A WKSecurityOrigin object consists of a host name, a protocal, and a port number. A first-party load is any load URL has the same security origin and the requseting web site. First-party webpages can access each other's resources such ad scripts and database.
+
+

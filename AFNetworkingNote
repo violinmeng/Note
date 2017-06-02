@@ -1,0 +1,52 @@
+AFURLSessionManager is the root class
+AFHTTPSessionManager is a subclass of AFURLSessionManager with convinience methods for making HTTP requests.
+When a 'baseURL' is provided, requests made with the 'GET' / 'POST'/ et al. convenience methods can be made with relative path.
+## Subclassing Notes
+Developers targeting iOS 7 or Mac OSX 10.9 or later thar deal extensively with a web service are encourage to subclass 'AFHTTPSessionManager', providing a class method that return a shared singleton object on which authentication and other configratin can be shared across the applacation.
+For developers targeting iOS 6 or Mac OS X 10.8 or earlier, 'AFHTTPRequestOperationManager' may be used to similar effect.
+
+## Methods to override
+to change the behavior of all data task operation construction, which is also used in the 'GET' / 'POST'/ et al. convienience methods, override 'dataTaskWithRequest:uploadProgress:downloadProgress:completionHander:'.
+
+##Serialization
+Requests created by an HTTP client will contain default headers an encode parameters according to the 'requestSerializer' property, which is an object conforming to '<AFURLRequestSerialization>'.
+
+Response received from the server are automatically validated and serialized by the 'responseSerializers' property, which is an object conforming to '<AFURLResponseSerialization>'.
+
+## URL construction using relative paths
+For HTTP convenience methods, the request serializer constructs URLs from the path relative to the '-baseURL', using 'NSURL +URLWithString:relativeToURL:', when provided. If 'baseURL' is 'nil', 'path' needs to resolve to a valid 'NSURL' object using 'NSURL +URLWithString:'/
+
+Also important to note is that a trailing slash will be added th any 'baseURL' without one. This would otherwise cause unexpected behavior when constructing URLs using paths without a leading slash.
+
+@warning Managers for background sessions must be owned for the dutation of their use. This can be accomplised by creating an applacation-wide or shared singleton instance.
+
+@property(readonly, nonatomic, strong, nullable) NSURL *baseURL;
+the URL used construct requests from relative paths in methods like 'requestWithMethod:URLString:parameters:', and the 'GET' / 'POST' et al. convenience methods. we will get the 'baseURL' through this property.
+
+@property(nonatomic, strong) AFHTTPRequestSerializer <AFURLRequestSerailization> *requestSerializer;
+requests created with 'requestWithMethod:URLString:parameters:' & 'multipartFormRequestWithMethod:URLString:parameters:constructingBodyWithBlock:' are constructed with a set of default headers using a parameter serialization specified by this property. By default, this is set to an instance of 'AFHTTPRequestSerializer', which serializes query string parameters for 'GET', 'HEAD', and 'DELETE' or otherwise URL-form-encodes HTTP message bodies.
+@warning 'reqestSerializer' must not be 'nil'.
+
+@property(nonatomic, strong) AFHTTPResponseSerializer <AFURLResponseSerialization> *responseSetializer;
+Responses sent from the server in data tasks created with 'dataTaskWithRequest:success:failure:' and run using the 'GET' / 'POST' /et al. convenience methods are automatically validated and serialized by the response serializer. By default, this property is set to an instance of 'AFJSONResponse Serializer'.
+@warning 'responseSerialzier' must not be 'nil'.
+
+@property(nonatomic, strong) AFSecurityPolicy *securityPolicy;
+the security policy used by created session to evaluate server trust for secure connections. 'AFURLSessionManager' uses the 'defaultPolicy' unless otherwise specified. A security policy configured with 'AFSSLPinningModePublicKey' or 'AFSSLPinningModeCertificate' can only be applied on a session manager initialized with a secure base URL (i.e. https). Applying a security policy with pinning enabled on an insecure session manager throws an 'Invalid Security Policy' exception.
+
+@dynamic securityPolicy;
+in this case, AFHTTPSessionManager is the subclass of AFURLSessionManager, and there are getter and setter in the super class.
+
+AFURLSessionManager
+'AFURLSessionManager' creates and managers an 'NSURLSession' object based on a specified 'NSURLSessionConfiguration' object, which conforms to '<NSURLSessionDownloadDelegate>', and <NSURLSessionDelegate'.
+
+## Subclassing Notes
+This is the base class for 'AFHTTPSessionManager', which adds functionality specific to making HTTP requests. If you are looking to extend 'AFURLManager' specifically for HTTP, consider subclassing 'AFHTTPSessionManager' instead.
+
+## NSURLSession & NSURLSessionTask Delegate Methods
+'AFURLSessionManager' implements the following delegate methods:
+
+### 'NSURLSessionDelegate'
+
+- 'URLSession:didBecomeInvalidWithError:'
+- 'URLSession:didReceiveC
